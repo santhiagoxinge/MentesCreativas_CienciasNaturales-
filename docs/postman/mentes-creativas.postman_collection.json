@@ -1,0 +1,79 @@
+{
+  "info": {
+    "name": "Mentes Creativas - Ciencias Naturales",
+    "description": "Pruebas de integracion para validar el endpoint estatico de contenidos del proyecto desplegado en Vercel.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Obtener temas de Ciencias Naturales",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/lessons.json",
+          "host": ["{{base_url}}"],
+          "path": ["api", "lessons.json"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test('Contiene tres temas', function () {",
+              "  const data = pm.response.json();",
+              "  pm.expect(data.topics).to.have.length(3);",
+              "});",
+              "",
+              "pm.test('Incluye Ciclo del agua', function () {",
+              "  const data = pm.response.json();",
+              "  pm.expect(data.topics.map(topic => topic.title)).to.include('Ciclo del agua');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Validar carga de la aplicacion",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/",
+          "host": ["{{base_url}}"],
+          "path": [""]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test('HTML contiene root de React', function () {",
+              "  pm.expect(pm.response.text()).to.include('root');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://TU-URL-DE-VERCEL.vercel.app"
+    }
+  ]
+}

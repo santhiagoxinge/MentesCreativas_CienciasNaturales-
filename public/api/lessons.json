@@ -1,0 +1,21 @@
+{
+  "project": "Mentes Creativas - Ciencias Naturales",
+  "audience": "Estudiantes de cuarto y quinto grado",
+  "topics": [
+    {
+      "id": "ecosistemas",
+      "title": "Ecosistemas",
+      "objective": "Reconocer factores bioticos y abioticos en un ecosistema escolar."
+    },
+    {
+      "id": "ciclo-agua",
+      "title": "Ciclo del agua",
+      "objective": "Ordenar evaporacion, condensacion, precipitacion e infiltracion."
+    },
+    {
+      "id": "cuerpo-humano",
+      "title": "Cuerpo humano",
+      "objective": "Relacionar sistemas del cuerpo con funciones vitales."
+    }
+  ]
+}

@@ -1,0 +1,295 @@
+\documentclass[man,12pt]{apa7}
+
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{csquotes}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage[
+  style=apa,
+  sortcites=true,
+  sorting=nyt,
+  backend=biber
+]{biblatex}
+
+\addbibresource{referencias.bib}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=blue,
+  citecolor=black
+}
+
+\lstdefinestyle{codigo}{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  backgroundcolor=\color{gray!8},
+  rulecolor=\color{gray!35}
+}
+
+\title{Evaluacion de Calidad de Software del Proyecto Mentes Creativas: Ciencias Naturales}
+\shorttitle{Calidad de Software en Mentes Creativas}
+\author{Nombre del integrante 1 \\ Nombre del integrante 2 \\ Nombre del integrante 3}
+\affiliation{Universidad Cooperativa de Colombia}
+\course{Calidad de Software}
+\professor{Mg. Gustavo Sanchez Rodriguez}
+\duedate{Fecha de entrega}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Este documento presenta la evaluacion de calidad del proyecto \textit{Mentes Creativas: Ciencias Naturales}, una aplicacion frontend construida con React y Vite para apoyar procesos de enseñanza-aprendizaje en estudiantes de cuarto y quinto grado. El proyecto desarrolla tres temas: ecosistemas, ciclo del agua y cuerpo humano. La evaluacion se fundamenta en la norma ISO/IEC 25010, con enfasis en usabilidad, capacidad de aprendizaje y operabilidad. Tambien se documentan pruebas unitarias con Jest, integracion con Postman, pruebas de sistema con JMeter, integracion continua con GitHub Actions y despliegue del frontend en Vercel.
+\end{abstract}
+
+\keywords{calidad de software, ISO/IEC 25010, React, Jest, Vercel, ciencias naturales}
+
+\section{Introduccion}
+
+La calidad del software permite verificar que una aplicacion cumpla los requisitos funcionales, tecnicos y de experiencia definidos para sus usuarios. En este trabajo se desarrolla y evalua una aplicacion educativa multimedia para el Colegio Mentes Creativas, orientada a estudiantes de cuarto y quinto grado en el area de Ciencias Naturales.
+
+El proyecto se implementa como un frontend en React con Vite. Su proposito es facilitar el aprendizaje ludico mediante recursos visuales, audio por sintesis de voz, animaciones y modelos graficos 3D basados en CSS. La evaluacion se realiza a partir del modelo ISO/IEC 25010, pruebas automatizadas, pruebas de integracion, pruebas de carga, validacion de despliegue y criterios de aceptacion \parencite{iso25010,pressman2020}.
+
+\section{Escenario Asignado y Justificacion}
+
+El Colegio Mentes Creativas busca implementar una aplicacion multimedia que apoye procesos de enseñanza-aprendizaje en areas clave del curriculo. Para esta entrega se selecciono el area de Ciencias Naturales, debido a que permite explicar fenomenos observables mediante recursos interactivos y representaciones visuales.
+
+La aplicacion desarrolla tres temas:
+
+\begin{itemize}
+  \item Ecosistemas.
+  \item Ciclo del agua.
+  \item Cuerpo humano.
+\end{itemize}
+
+La seleccion de estos temas permite trabajar conceptos fundamentales del grado cuarto y quinto, como relaciones entre seres vivos, cambios del agua en la naturaleza y sistemas del cuerpo humano. El uso de componentes interactivos busca favorecer la comprension, la exploracion autonoma y la retroalimentacion inmediata.
+
+\section{Requerimientos Funcionales}
+
+La Tabla \ref{tab:requerimientos} presenta los requerimientos funcionales definidos para el proyecto.
+
+\begin{table}[H]
+\centering
+\caption{Requerimientos funcionales del proyecto}
+\label{tab:requerimientos}
+\begin{tabular}{p{2.2cm}p{10.2cm}}
+\toprule
+\textbf{ID} & \textbf{Requerimiento funcional} \\
+\midrule
+RF-01 & El sistema debe permitir seleccionar entre los temas Ecosistemas, Ciclo del agua y Cuerpo humano. \\
+RF-02 & El sistema debe mostrar objetivos de aprendizaje por cada tema. \\
+RF-03 & El sistema debe presentar palabras clave y conceptos principales de cada tema. \\
+RF-04 & El sistema debe incluir un recurso multimedia interactivo por tema. \\
+RF-05 & El sistema debe permitir reproducir una guia auditiva mediante sintesis de voz. \\
+RF-06 & El sistema debe incluir una actividad de laboratorio guiada por cada tema. \\
+RF-07 & El sistema debe presentar una evaluacion corta con retroalimentacion inmediata. \\
+RF-08 & El sistema debe publicar un endpoint estatico con los temas disponibles para pruebas de integracion. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Norma y Modelo de Calidad Aplicado}
+
+La norma ISO/IEC 25010 define un modelo de calidad del producto software que agrupa caracteristicas como adecuacion funcional, eficiencia de desempeño, compatibilidad, usabilidad, fiabilidad, seguridad, mantenibilidad y portabilidad \parencite{iso25010}.
+
+Para este proyecto se selecciona la caracteristica \textbf{usabilidad}, porque el usuario principal es un estudiante de cuarto o quinto grado. En este contexto, la calidad no depende solo de que la aplicacion funcione, sino de que sea comprensible, operable y adecuada para apoyar el aprendizaje.
+
+Los subatributos seleccionados son:
+
+\begin{itemize}
+  \item \textbf{Capacidad de aprendizaje}: facilidad con la que el estudiante comprende como usar el sistema y aprende el contenido.
+  \item \textbf{Operabilidad}: facilidad para navegar, seleccionar temas, activar recursos y responder evaluaciones.
+\end{itemize}
+
+\section{Metricas de Calidad Definidas}
+
+\begin{table}[H]
+\centering
+\caption{Metricas asociadas a ISO/IEC 25010}
+\label{tab:metricas}
+\begin{tabular}{p{3cm}p{4.2cm}p{4.8cm}}
+\toprule
+\textbf{Subatributo} & \textbf{Metrica} & \textbf{Criterio de aceptacion} \\
+\midrule
+Capacidad de aprendizaje & Finalizacion de una evaluacion corta por tema. & El estudiante responde al menos una pregunta y recibe retroalimentacion visible. \\
+Capacidad de aprendizaje & Claridad de objetivos y palabras clave. & Cada tema contiene minimo tres objetivos y cinco palabras clave. \\
+Operabilidad & Navegacion entre temas y secciones. & El usuario puede cambiar de tema y abrir Exploracion, Laboratorio y Evaluacion sin errores. \\
+Operabilidad & Rendimiento percibido. & El sitio desplegado responde con promedio menor a cinco segundos en JMeter. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Arquitectura Tecnica}
+
+El proyecto se implementa con React, Vite y TypeScript. La interfaz se divide en componentes reutilizables: un menu lateral de temas, un lienzo visual para recursos 3D, una seccion de exploracion, un laboratorio guiado y un panel de evaluacion.
+
+La estructura principal del repositorio es:
+
+\begin{lstlisting}[style=codigo]
+src/
+  components/
+  data/
+  test/
+public/
+  api/
+docs/
+  evidencias/
+  jmeter/
+  overleaf/
+  postman/
+.github/workflows/
+\end{lstlisting}
+
+\section{Proceso de Despliegue en Vercel}
+
+El despliegue se realiza conectando el repositorio de GitHub con Vercel. La configuracion usada es:
+
+\begin{itemize}
+  \item Framework preset: Vite.
+  \item Install command: \texttt{npm install}.
+  \item Build command: \texttt{npm run build}.
+  \item Output directory: \texttt{dist}.
+\end{itemize}
+
+La URL publica del despliegue es:
+
+\begin{quote}
+\textbf{URL de Vercel:} \url{https://TU-URL-DE-VERCEL.vercel.app}
+\end{quote}
+
+\textbf{Evidencia requerida:} agregar captura del despliegue exitoso y de la aplicacion funcionando en produccion.
+
+\section{Pruebas Unitarias Implementadas}
+
+Las pruebas unitarias se implementan con Jest y React Testing Library \parencite{jestDocs,testingLibraryDocs}. Estas pruebas validan:
+
+\begin{itemize}
+  \item Renderizado del titulo y los tres temas.
+  \item Cambio de tema desde el menu.
+  \item Resolucion de preguntas con retroalimentacion.
+  \item Activacion del recurso de audio mediante Web Speech API.
+  \item Consistencia de los datos educativos.
+\end{itemize}
+
+El comando de ejecucion es:
+
+\begin{lstlisting}[style=codigo]
+npm test
+\end{lstlisting}
+
+\textbf{Evidencia requerida:} agregar captura de la terminal con pruebas exitosas.
+
+\section{Automatizacion de Integracion Continua}
+
+Se configura GitHub Actions mediante el archivo \texttt{.github/workflows/ci.yml}. El flujo ejecuta instalacion de dependencias, pruebas unitarias y construccion del proyecto en cada push o pull request hacia la rama \texttt{main}.
+
+\begin{lstlisting}[style=codigo]
+npm install
+npm test
+npm run build
+\end{lstlisting}
+
+La integracion continua permite detectar errores antes del despliegue y aporta evidencia objetiva del proceso de aseguramiento de calidad \parencite{githubActionsDocs}.
+
+\section{Pruebas de Integracion con Postman}
+
+La coleccion de Postman se encuentra en:
+
+\begin{lstlisting}[style=codigo]
+docs/postman/mentes-creativas.postman_collection.json
+\end{lstlisting}
+
+Los casos incluidos son:
+
+\begin{itemize}
+  \item Validar carga de la pagina principal.
+  \item Validar estado 200 del endpoint \texttt{/api/lessons.json}.
+  \item Verificar que el endpoint contiene tres temas.
+  \item Confirmar que uno de los temas es Ciclo del agua.
+\end{itemize}
+
+\textbf{Evidencia requerida:} agregar capturas de Postman con pruebas exitosas.
+
+\section{Pruebas de Sistema con JMeter}
+
+La prueba de carga se diseña en JMeter para simular 25 usuarios concurrentes, con dos iteraciones por usuario, sobre la URL publica de Vercel. El archivo se encuentra en:
+
+\begin{lstlisting}[style=codigo]
+docs/jmeter/mentes-creativas-carga.jmx
+\end{lstlisting}
+
+Los endpoints evaluados son:
+
+\begin{itemize}
+  \item \texttt{/}
+  \item \texttt{/api/lessons.json}
+\end{itemize}
+
+El criterio de aceptacion definido es mantener un tiempo promedio menor a cinco segundos y una tasa de error cercana a cero.
+
+\section{Pruebas de Implantacion}
+
+Las pruebas de implantacion validan que el frontend se encuentre disponible en Vercel y que las funcionalidades principales se ejecuten correctamente en produccion. Se debe verificar:
+
+\begin{itemize}
+  \item Carga inicial del sitio.
+  \item Navegacion entre los tres temas.
+  \item Acceso a exploracion, laboratorio y evaluacion.
+  \item Endpoint \texttt{/api/lessons.json}.
+  \item Consola del navegador sin errores visibles.
+\end{itemize}
+
+\section{Checklist de Aceptacion}
+
+\begin{table}[H]
+\centering
+\caption{Checklist de pruebas de aceptacion}
+\label{tab:aceptacion}
+\begin{tabular}{p{0.9cm}p{8.2cm}p{1.6cm}p{2.3cm}}
+\toprule
+\textbf{ID} & \textbf{Criterio} & \textbf{Cumple} & \textbf{Observacion} \\
+\midrule
+1 & El sitio educativo se despliega correctamente en Vercel sin errores visibles. & Pendiente & Completar. \\
+2 & El proyecto carga en menos de 3 segundos desde Vercel. & Pendiente & Medir. \\
+3 & El endpoint devuelve datos correctos. & Pendiente & Postman. \\
+4 & La navegacion o interaccion del aplicativo es fluida. & Pendiente & Validacion manual. \\
+5 & No se presentan errores visibles en consola del navegador. & Pendiente & Captura. \\
+6 & Las pruebas unitarias pasan correctamente en el pipeline automatico. & Pendiente & GitHub Actions. \\
+7 & Las pruebas de integracion con Postman son exitosas. & Pendiente & Captura. \\
+8 & Los resultados de JMeter estan dentro de los tiempos aceptables. & Pendiente & Reporte. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Analisis de Resultados}
+
+Los resultados deben analizarse una vez se ejecute el proyecto en local, GitHub Actions, Postman, JMeter y Vercel. La interpretacion debe relacionar los hallazgos con la usabilidad, la capacidad de aprendizaje y la operabilidad.
+
+Se espera que el proyecto demuestre que una interfaz organizada por temas, con audio, elementos visuales, laboratorio guiado y evaluaciones cortas, mejora la comprension del contenido y facilita la navegacion autonoma de los estudiantes.
+
+\section{Mejoras Propuestas}
+
+\begin{itemize}
+  \item Agregar autenticacion para guardar avance por estudiante.
+  \item Incorporar videos propios producidos por el colegio.
+  \item Agregar accesibilidad con contraste configurable y lectura de texto ampliada.
+  \item Registrar resultados de evaluaciones para analitica academica.
+  \item Crear mas modulos de Ciencias Naturales para otros grados.
+\end{itemize}
+
+\section{Conclusiones}
+
+El proyecto \textit{Mentes Creativas: Ciencias Naturales} integra desarrollo frontend, aseguramiento de calidad, pruebas automatizadas, integracion continua y despliegue en la nube. La aplicacion cumple un objetivo educativo concreto y permite evidenciar practicas de calidad asociadas al modelo ISO/IEC 25010.
+
+La seleccion de usabilidad como caracteristica principal resulta adecuada porque los usuarios son estudiantes de primaria. Por esta razon, los criterios de calidad se enfocan en claridad, aprendizaje, navegacion, retroalimentacion y disponibilidad del sistema.
+
+\printbibliography
+
+\end{document}
