@@ -9,7 +9,7 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="BASE_URL" elementType="Argument">
             <stringProp name="Argument.name">BASE_URL</stringProp>
-            <stringProp name="Argument.value">TU-URL-DE-VERCEL.vercel.app</stringProp>
+            <stringProp name="Argument.value">mentes-creativas-ciencias-naturales-rho.vercel.app</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>

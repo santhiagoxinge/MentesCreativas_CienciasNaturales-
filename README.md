@@ -36,6 +36,12 @@ npm run build
 
 ## Despliegue en Vercel
 
+URL publicada:
+
+```text
+https://mentes-creativas-ciencias-naturales-rho.vercel.app
+```
+
 Configuracion recomendada en Vercel:
 
 - Framework preset: `Vite`.
