@@ -154,9 +154,16 @@ const App = () => {
                 <li key={step}>{step}</li>
               ))}
             </ol>
-            <div className="video-simulation" aria-label="Animacion educativa tipo video">
-              <span />
-              <p>Animacion multimedia: {lesson.shortTitle}</p>
+            <div className="lab-visual" aria-label={`Simulacion educativa lista para ${lesson.shortTitle}`}>
+              <div className="lab-visual-track" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+              </div>
+              <div className="lab-visual-copy">
+                <strong>Simulacion lista</strong>
+                <p>{lesson.multimedia}</p>
+              </div>
             </div>
           </section>
         )}

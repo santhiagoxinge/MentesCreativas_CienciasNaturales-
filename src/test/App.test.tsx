@@ -53,4 +53,15 @@ describe("Mentes Creativas Ciencias Naturales", () => {
 
     expect(window.speechSynthesis.speak).toHaveBeenCalledTimes(1);
   });
+
+  test("muestra el laboratorio sin indicador de carga permanente", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    await user.click(screen.getByRole("tab", { name: /Laboratorio/i }));
+
+    expect(screen.getByRole("heading", { name: /Laboratorio interactivo/i })).toBeInTheDocument();
+    expect(screen.getByText(/Simulacion lista/i)).toBeInTheDocument();
+    expect(screen.queryByText(/cargando/i)).not.toBeInTheDocument();
+  });
 });

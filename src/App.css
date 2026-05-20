@@ -542,42 +542,60 @@ button {
   gap: 18px;
 }
 
-.video-simulation {
+.lab-visual {
   position: relative;
   display: grid;
+  grid-template-columns: minmax(180px, 0.55fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
   min-height: 190px;
-  place-items: center;
   overflow: hidden;
   border-radius: 24px;
+  padding: 22px;
   background:
     linear-gradient(120deg, rgba(126, 166, 110, 0.12), rgba(128, 185, 198, 0.3)),
     #f6fbf8;
 }
 
-.video-simulation span {
-  width: 96px;
-  height: 96px;
-  border: 14px solid rgba(36, 76, 53, 0.18);
-  border-left-color: #244c35;
-  border-radius: 999px;
-  animation: rotate-media 4s linear infinite;
+.lab-visual-track {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  min-height: 118px;
 }
 
-.video-simulation p {
-  position: absolute;
-  right: 22px;
-  bottom: 16px;
-  left: 22px;
-  margin: 0;
-  color: #2b4434;
+.lab-visual-track span {
+  display: block;
+  border: 1px solid rgba(36, 76, 53, 0.14);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(126, 166, 110, 0.28));
+  transform: translateY(var(--offset, 0));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.lab-visual-track span:nth-child(1) {
+  --offset: 18px;
+}
+
+.lab-visual-track span:nth-child(2) {
+  --offset: 0;
+}
+
+.lab-visual-track span:nth-child(3) {
+  --offset: 28px;
+}
+
+.lab-visual-copy strong {
+  display: block;
+  color: #244c35;
+  font-size: 1.12rem;
   font-weight: 900;
-  text-align: center;
 }
 
-@keyframes rotate-media {
-  to {
-    transform: rotate(360deg);
-  }
+.lab-visual-copy p {
+  margin: 0;
+  color: #4d5e52;
+  line-height: 1.65;
 }
 
 .score-strip {
@@ -685,6 +703,10 @@ button {
   }
 
   .option-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lab-visual {
     grid-template-columns: 1fr;
   }
 }
